@@ -1,0 +1,43 @@
+
+  ### Part 2: Simple Selects and Counts
+
+  Directions: Write a sql query or sql queries that can answer the following questions
+
+  * What are all the types of pokemon that a pokemon can have?
+    1. SELECT * FROM pokemon.types;
+  * What is the name of the pokemon with id 45?
+    2. SELECT name FROM pokemon.pokemons WHERE id=45;
+  * How many pokemon are there?
+    3. SELECT COUNT(*) AS count FROM pokemon.pokemons;
+  * How many types are there?
+    4. SELECT COUNT(*) AS count FROM pokemon.types;
+  * How many pokemon have a secondary type?
+    5. SELECT * FROM pokemon.pokemons where secondary_Type IS NOT NULL;
+
+
+  ### Part 3: Joins and Groups
+  Directions: Write a sql query or sql queries that can answer the following questions
+  * What is each pokemon's primary type?
+    1. SELECT p.name, t.name FROM pokemons p INNER JOIN types t ON p.primary_type = t.id;
+  * What is Rufflet's secondary type?
+    2. SELECT p.name,p.secondary_type,t.name FROM pokemons p JOIN types t ON p.secondary_type = t.id where p.name='Rufflet';
+  * What are the names of the pokemon that belong to the trainer with trainerID 303?
+    3. SELECT t.name, t.id FROM pokemons t INNER JOIN pokemon_trainer a ON t.id = a.pokemon_id WHERE a.trainerID = 303;
+  * How many pokemon have a secondary type `Poison`
+    4. SELECT
+  * What are all the primary types and how many pokemon have that type?
+    5. SELECT
+  * How many pokemon at level 100 does each trainer with at least one level 100 pokemone have? (Hint: your query should not display a trainer
+    6. SELECT
+  * How many pokemon only belong to one trainer and no other?
+    7. SELECT
+
+  ### Part 4: Final Report
+
+  Directions: Write a query that returns the following collumns:
+
+  | Pokemon Name | Trainer Name | Level | Primary Type | Secondary Type |
+  |:------------:|:------------:|:-----:|:------------:|:--------------:|
+  | Pokemon's name| Trainer's name| Current Level| Primary Type Name| Secondary Type Name|
+
+  Sort the data by finding out which trainer has the strongest pokemon so that this will act as a ranking of strongest to weakest trainer. You may interpret strongest in whatever way you want, but you will have to explain your decision.
