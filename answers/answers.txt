@@ -28,7 +28,7 @@
   * What are all the primary types and how many pokemon have that type?
     5. SELECT c.primary_type, COUNT(t.id) as COUNT  FROM pokemons c LEFT JOIN types t ON c.primary_type = t.id GROUP BY c.primary_type;
   * How many pokemon at level 100 does each trainer with at least one level 100 pokemone have? (Hint: your query should not display a trainer
-    6.  SELECT COUNT(pokemon_id) as "count" FROM pokemon_trainer WHERE pokeLevel = 100 GROUP BY trainerID;
+    6. SELECT COUNT(pokemon_id) as "count" FROM pokemon_trainer WHERE pokeLevel = 100 GROUP BY trainerID;
   * How many pokemon only belong to one trainer and no other?
     7. SELECT
 
@@ -41,3 +41,16 @@
   | Pokemon's name| Trainer's name| Current Level| Primary Type Name| Secondary Type Name|
 
   Sort the data by finding out which trainer has the strongest pokemon so that this will act as a ranking of strongest to weakest trainer. You may interpret strongest in whatever way you want, but you will have to explain your decision.
+
+SELECT poke.name AS "Pokemon Name",
+       trainername AS "Trainer Name",
+       pokelevel AS "Level",
+       typePrimary.name AS "Primary Type",
+       typeSecondary.name AS "Secondary Type"
+FROM pokemon.trainers AS ash
+       LEFT JOIN pokemon_trainer AS p_t ON ash.trainerID = p_t.trainerID
+       LEFT JOIN pokemons AS poke ON poke.id = p_t.pokemon_id
+       LEFT JOIN types AS typePrimary ON poke.primary_type = typePrimary.id
+       LEFT JOIN types AS typeSecondary ON poke.secondary_type = typeSecondary.id
+       GROUP BY poke.name, ash.trainername, pokelevel, attack, spatk, speed, typePrimary.name, typeSecondary.name
+       ORDER BY AVG(attack + spatk + speed);
